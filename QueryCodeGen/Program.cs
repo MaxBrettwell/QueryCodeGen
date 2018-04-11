@@ -30,7 +30,7 @@ namespace QueryCodeGen
 
 
 
-            Application.Run(new formMain());
+            Application.Run(new formQueryCodeGen());
         }
 
         private static void loadSchemaServices()
@@ -52,7 +52,8 @@ namespace QueryCodeGen
             return;
         }
 
-
+        public static ICodeGenerator codeGenerator = null;
+        public static ISchemaService schemaService = null;
 
     }
 }

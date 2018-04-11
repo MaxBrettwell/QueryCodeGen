@@ -4,7 +4,7 @@ namespace QueryCodeGen.Service
 {
     interface ISchemaService
     {
-        string SchemaServiceName();
+        string SchemaServiceName {get;}        
         DataTable getTableSchema(string connectionString, string query);
     }
 }

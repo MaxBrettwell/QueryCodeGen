@@ -14,6 +14,8 @@ namespace QueryCodeGen.Service
     {
         private string _schemaServiceName = "Mock Schema Service";
 
+        string ISchemaService.SchemaServiceName => _schemaServiceName;
+
         public MockSchemaService()
         {}
 

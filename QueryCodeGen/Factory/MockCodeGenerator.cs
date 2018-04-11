@@ -25,6 +25,8 @@ End Template
 
         public string template { get { return _template; } set { _template = value;}}
 
+        string ICodeGenerator.GeneratorName { get => _generatorName;}
+
         public string GeneratorName()
         {
             return "New Generator";
