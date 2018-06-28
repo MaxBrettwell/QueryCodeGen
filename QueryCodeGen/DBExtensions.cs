@@ -62,6 +62,10 @@ namespace QueryCodeGen
         {
             IDbCommand command = conn.GetCommand(commandText, parameters, commandTimeout, commandType);
             var reader = command.ExecuteReader(commandBehavior);
+            return reader.GetDataTable();
+        }
+
+        public static DataTable GetDataTable(this IDataReader reader) {
             var set = new DataSet();
             var table = new DataTable();
             set.Tables.Add(table);
@@ -70,6 +74,7 @@ namespace QueryCodeGen
             reader.Close();
             return table;
         }
+
     }
 
 }

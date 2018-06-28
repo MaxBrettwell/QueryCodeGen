@@ -24,15 +24,26 @@ namespace QueryCodeGen.Service
             return conn;
         }
 
-        public System.Data.DataTable getTableSchema(string connString, string query) {
+        public System.Data.DataTable getSchema(string connString, string query) {
 
             IDbConnection conn = new OdbcConnection();
             conn.ConnectionString = connString;
             conn.Open();
+
+            IDataReader reader;
+            try {
+                System.Data.SqlClient.SqlConnection SqlConnection = (System.Data.SqlClient.SqlConnection)conn;
+                reader = SqlConnection.GetDataReader(commandText: query);                
+            }
+            catch (Exception ex) {
+                reader = conn.GetDataReader(commandText: query);                
+            }
             //DataTable table = conn.GetDataTable(commandText: query, commandBehavior: System.Data.CommandBehavior.SchemaOnly);
-            IDataReader reader = conn.GetDataReader(commandText: query, commandBehavior: CommandBehavior.SchemaOnly);
+            //DataTable dt = reader.GetDataTable();
             DataTable schemaTable = reader.GetSchemaTable();
             return schemaTable;
+
+
         }
     }
 }

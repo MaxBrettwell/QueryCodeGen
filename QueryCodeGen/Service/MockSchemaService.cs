@@ -29,7 +29,7 @@ namespace QueryCodeGen.Service
             return conn;
         }
 
-        public System.Data.DataTable getTableSchema(string connString, string query) {
+        public System.Data.DataTable getSchema(string connString, string query) {
             return null;
         }
 

@@ -19,22 +19,30 @@ End Template
         private string _generatorName;
 
         public MockCodeGenerator() { }
-        public MockCodeGenerator(string generatorName) {
+        public MockCodeGenerator(string generatorName = "New Generator") {
             _generatorName = generatorName;
         }
 
         public string template { get { return _template; } set { _template = value;}}
 
-        string ICodeGenerator.GeneratorName { get => _generatorName;}
-
+        string ICodeGenerator.GeneratorName
+        {
+            get
+            {
+                return _generatorName;
+            }
+        }
+        
+        //string ICodeGenerator.GeneratorName { get () => _generatorNamel; }
+        
         public string GeneratorName()
         {
-            return "New Generator";
+            return _generatorName;
         }
 
         public string Generate(string className, System.Data.DataTable dataTable)
         {
-            return "New Generated Code";
+            return this.GeneratorName() + "\n" + "New Generated Code";
         }
 
         public void launchConfigurator() {

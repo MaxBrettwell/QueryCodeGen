@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>depends\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBExtensions.cs" />
+    <Compile Include="Factory\AngularAgGridViewGenerator.cs" />
+    <Compile Include="Factory\AngularAgGridClassGenerator.cs" />
+    <Compile Include="Factory\CSharpModelGenerator.cs" />
+    <Compile Include="Factory\AngularFormViewGenerator.cs" />
+    <Compile Include="Factory\AngularFormClassGenerator.cs" />
+    <Compile Include="Factory\AngularTypeScript2JSONModelGenerator.cs" />
     <Compile Include="formMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +67,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ISchemaService.cs" />
     <Compile Include="Service\MockSchemaService.cs" />
+    <Compile Include="Service\JSONSchemaService.cs" />
+    <Compile Include="Service\SQLServerSchemaService.cs" />
     <Compile Include="Service\ODBCSchemaService.cs" />
     <EmbeddedResource Include="formMain.resx">
       <DependentUpon>formMain.cs</DependentUpon>

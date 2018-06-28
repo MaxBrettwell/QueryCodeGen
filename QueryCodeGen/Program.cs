@@ -36,9 +36,12 @@ namespace QueryCodeGen
         private static void loadSchemaServices()
         {
             SchemaServices = new List<ISchemaService> {
-                new ODBCSchemaService(),                
-                new MockSchemaService(),
-                new MockSchemaService("A 2nd Mock schema Service")
+                new SQLServerSchemaService("SQL Server Service WHOO!"),
+                new ODBCSchemaService(),
+                new JSONSchemaService(),
+                new MockSchemaService("Mock Schema Service"),
+                //new MockSchemaService("A 2nd Mock schema Service"),
+                
             };
             return;
         }
@@ -46,8 +49,19 @@ namespace QueryCodeGen
         private static void loadCodeGenerators()
         {
             CodeGenerators = new List<ICodeGenerator> {
-                new MockCodeGenerator(),
-                new MockCodeGenerator("A Second Mock Generator")
+                
+                //new MockCodeGenerator("A 2nd Mock Generator"),
+                new AngularFormClassGenerator(),
+                new AngularFormtViewGenerator(),
+                new AngularAgGridViewGenerator(),
+                new AngularAgGridClassGenerator(),
+
+                new Factory.AngularAgGridViewGenerator(),
+                new Factory.CSharpModelGenerator(),
+                
+                new AngularTypeScript2JSONModelGenerator(),
+                new MockCodeGenerator("Mock Code Generator"),
+
             };
             return;
         }

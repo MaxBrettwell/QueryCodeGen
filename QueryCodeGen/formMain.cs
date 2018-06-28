@@ -28,8 +28,7 @@ namespace QueryCodeGen
             this.cmbGenerator.DataSource = Program.CodeGenerators;
         }
 
-        private void btnGenerate_Click(object sender, EventArgs e)
-        {
+        private void getSchema() {
             ISchemaService selectedSchemaService = (ISchemaService)this.cmbSchemaService.SelectedItem;
             //MessageBox.Show(selectedSchemaService.SchemaServiceName);
 
@@ -38,19 +37,54 @@ namespace QueryCodeGen
 
             try
             {
-                this.dgvSchema.DataSource = null;                
-                schemaTable = selectedSchemaService.getTableSchema(txtConnectionString.Text, txtQuery.Text);
+                this.dgvSchema.DataSource = null;
+                schemaTable = selectedSchemaService.getSchema(txtConnectionString.Text, txtQuery.Text);
+
+                foreach (DataColumn c in schemaTable.Columns) {
+                    c.ReadOnly = false;
+                }
+
                 this.Refresh();
                 System.Threading.Thread.Sleep(10);
                 this.dgvSchema.DataSource = schemaTable;
+                
+
+
+                this.dgvSchema.ReadOnly = false;
+                foreach (DataGridViewRow r in this.dgvSchema.Rows) {
+                    r.ReadOnly = false;
+                }
+                foreach (DataGridViewColumn c in this.dgvSchema.Columns)
+                {
+                    c.ReadOnly = false;
+                }
                 return;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private void txtQuery_TextChanged(object sender, EventArgs e)
+        private void generate()
+        {
+            ICodeGenerator selectedCodeGenerator = (ICodeGenerator)this.cmbGenerator.SelectedItem;
+            this.txtGeneratedCode.Text = selectedCodeGenerator.Generate(this.txtClassName.Text, this.schemaTable);
+            //MessageBox.Show(selectedSchemaService.SchemaServiceName);
+
+        }
+
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            this.generate();            
+        }
+
+        private void btnGetSchema_Click(object sender, EventArgs e)
+        {
+            this.getSchema();
+        }
+
+        private void cmbGenerator_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
